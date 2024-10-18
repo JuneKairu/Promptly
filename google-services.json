@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "669976616506",
+    "project_id": "promptly-d20cb",
+    "storage_bucket": "promptly-d20cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669976616506:android:b341b2090b79347a579f03",
+        "android_client_info": {
+          "package_name": "com.poorsaken.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmh5PjsPyjmlnR00aaWN9dI6OvxLpCxEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
