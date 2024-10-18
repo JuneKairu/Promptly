@@ -4,9 +4,10 @@ import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from "@react-navigation/native";
-const addUserToFirestore = async (email: string, password: string) => {
+const addUserToFirestore = async (email: string, password: string , username: string) => {
   try {
     await firestore().collection('users').add({
+      username: username,
       email: email,
       password: password,
       createdAt: firestore.FieldValue.serverTimestamp(), 
@@ -20,6 +21,7 @@ const addUserToFirestore = async (email: string, password: string) => {
 // Example usage in a React component
 const usersignup: React.FC = () => {
   const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -29,7 +31,7 @@ const usersignup: React.FC = () => {
     setLoading(true);
     try {
       // Insert user data into Firestore
-      await addUserToFirestore(email, password);
+      await addUserToFirestore(email, password, username);
 
     } catch (error) {
       console.log(error);
@@ -41,6 +43,14 @@ const usersignup: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SIGN UP</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUsername}
+       
+        autoCapitalize="none"
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
