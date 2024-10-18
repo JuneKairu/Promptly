@@ -2,20 +2,18 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 // Import Firebase core and Firestore
 import firestore from "@react-native-firebase/firestore";
+import auth from "@react-native-firebase/auth"; // Import auth from Firebase Authentication
 
-const addUserToFirestore = async (email: string, password: string) => {
+const loginUser = async (email: string, password: string) => {
   try {
-    await firestore().collection("users").add({
-      email: email,
-      password: password,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-    });
-    console.log("User added to Firestore!");
+    const userCredential = await auth().signInWithEmailAndPassword(email, password);
+    
+    console.log('User logged in:', userCredential.user.uid);
   } catch (error) {
-    console.error("Error adding user to Firestore: ", error);
+    console.error('Error logging in: ', error);
+    Alert.alert("Login Failed", "Invalid email or password.");
   }
 };
-
 
 const LoginInScreen: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -25,9 +23,9 @@ const LoginInScreen: React.FC = () => {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      // Insert user data into Firestore
-      await addUserToFirestore(email, password);
-      Alert.alert("Success", "User added to Firestore");
+      // Log the user in
+      await loginUser(email, password);
+      Alert.alert("Success", "User logged in successfully");
     } catch (error) {
       console.log(error);
     } finally {
