@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 // Import Firebase core and Firestore
-import firestore from '@react-native-firebase/firestore';
 
+import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from "@react-navigation/native";
 const addUserToFirestore = async (email: string, password: string) => {
   try {
     await firestore().collection('users').add({
@@ -22,14 +23,16 @@ const usersignup: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleLogin = async () => {
+  const navigation = useNavigation();
+
+  const handleSignup = async () => {
     setLoading(true);
     try {
       // Insert user data into Firestore
       await addUserToFirestore(email, password);
-      Alert.alert("Success", "User added to Firestore");
+
     } catch (error) {
-     console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -55,7 +58,7 @@ const usersignup: React.FC = () => {
       />
       <Button
         title={loading ? "Logging in..." : "Login"}
-        onPress={handleLogin}
+        onPress={handleSignup}
         disabled={loading}
       />
     </View>

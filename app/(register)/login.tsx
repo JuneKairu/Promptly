@@ -1,33 +1,50 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 // Import Firebase core and Firestore
+import { useRouter } from "expo-router";
 import firestore from "@react-native-firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
-const addUserToFirestore = async (email: string, password: string) => {
+
+const getUserFromFirestore = async (email: string, password: string) => {
   try {
-    await firestore().collection("users").add({
-      email: email,
-      password: password,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-    });
-    console.log("User added to Firestore!");
+    // Query Firestore to find a user document with the matching email and password
+    const userQuerySnapshot = await firestore()
+      .collection("users")
+      .where("email", "==", email)
+      .where("password", "==", password) // Check the password in plain text
+      .get();
+
+    // Check if any documents match the query
+    if (!userQuerySnapshot.empty) {
+      return userQuerySnapshot.docs[0].data(); // return the first matching user data
+    } else {
+      console.log("No user found with this email and password");
+      return null;
+    }
   } catch (error) {
-    console.error("Error adding user to Firestore: ", error);
+    console.error("Error fetching user from Firestore: ", error);
   }
 };
-
 
 const LoginInScreen: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleLogin = async () => {
     setLoading(true);
     try {
-      // Insert user data into Firestore
-      await addUserToFirestore(email, password);
-      Alert.alert("Success", "User added to Firestore");
+      // Get the user from Firestore by email and password
+      const userData = await getUserFromFirestore(email, password);
+
+      if (userData) {
+        Alert.alert("Success", "Login successful");
+        router.push("../(mainscreen)/mainscreen");
+      } else {
+        Alert.alert("Error", "Incorrect email or password");
+      }
     } catch (error) {
       console.log(error);
     } finally {
