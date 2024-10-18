@@ -29,6 +29,7 @@ const usersignup: React.FC = () => {
 
   const handleSignup = async () => {
     setLoading(true);
+    
     try {
       // Insert user data into Firestore
       await addUserToFirestore(email, password, username);
