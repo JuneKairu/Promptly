@@ -3,9 +3,8 @@ import { Link } from "expo-router";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text></Text>
-      <Link href="/login">LOGIN</Link>
-      {/* <Link href="/signup">SIGNUP</Link> */}
+      <Link href="/login">login</Link>
+      <Link href="/neyenye">signup</Link>
     </View>
   );
 }

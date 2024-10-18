@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 // Import Firebase core and Firestore
-import firestore from '@react-native-firebase/firestore';
+import firestore from "@react-native-firebase/firestore";
 
 const addUserToFirestore = async (email: string, password: string) => {
   try {
-    await firestore().collection('users').add({
+    await firestore().collection("users").add({
       email: email,
       password: password,
-      createdAt: firestore.FieldValue.serverTimestamp(), 
+      createdAt: firestore.FieldValue.serverTimestamp(),
     });
-    console.log('User added to Firestore!');
+    console.log("User added to Firestore!");
   } catch (error) {
-    console.error('Error adding user to Firestore: ', error);
+    console.error("Error adding user to Firestore: ", error);
   }
 };
 
-// Example usage in a React component
-const LoginScreen: React.FC = () => {
+
+const LoginInScreen: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const LoginScreen: React.FC = () => {
       await addUserToFirestore(email, password);
       Alert.alert("Success", "User added to Firestore");
     } catch (error) {
-     console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default LoginInScreen;

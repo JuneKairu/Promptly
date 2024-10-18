@@ -50,6 +50,7 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="(register)" options={{headerShown: false}} />
+      <Stack.Screen name="(main_screen)" options={{headerShown: false}} />
     </Stack>
   );
 }
