@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 // Import Firebase core and Firestore
 import { useRouter } from "expo-router";
+import { firebase } from "@react-native-firebase/firestore";
+
 import firestore from "@react-native-firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 
