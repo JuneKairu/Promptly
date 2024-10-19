@@ -6,7 +6,7 @@ export default function HomeScreen() {
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.ImageContainer}>
-          <Image source={require("../../assets/images/t")} />
+          <Image source={require("../../assets/images/tormarch38 1.png")} />
         </View>
 
         <Link href="/login">login</Link>
@@ -22,4 +22,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  ImageContainer: {
+
+  }
 });
