@@ -11,6 +11,7 @@ export default function HomeLayout() {
         headerTitleStyle: {
           fontWeight: "bold",
         },
+        animation: "fade",
       }}
     >
       <Stack.Screen name="neyenye" options={{ headerShown: false }} />

@@ -1,16 +1,44 @@
-import { View, Text, StyleSheet,Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from "react-native";
 import { Link } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function HomeScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
       <View style={styles.container}>
-        <View style={styles.ImageContainer}>
-          <Image source={require("../../assets/images/tormarch38 1.png")} />
+        <View>
+          <Image
+            style={styles.imageContainer}
+            source={require("../../assets/images/tormarch38 1.png")}
+          />
         </View>
 
-        <Link href="/login">login</Link>
-        <Link href="/neyenye">signup</Link>
+        <View style={styles.titlelogo}>
+          <Text style={styles.titleText}>Promptly</Text>
+          <Text style={styles.subtitleText}>
+            Stay organized, productive, and stress-free.
+          </Text>
+        </View>
+
+        <View style={styles.bottomContainer}>
+          <TouchableOpacity style={styles.buttonLogin}>
+            <Link href="/login" style={styles.link}>
+              Login
+            </Link>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonSignUp}>
+            <Link href="/neyenye" style={{color:'#934CDB', textTransform:'uppercase',}}>
+              Signup
+            </Link>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -18,11 +46,38 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  imageContainer: {
+    marginTop: "10%",
+    width: "80%",
+    height: undefined,
+    aspectRatio: 1,
+    resizeMode: "contain",
+  },
+  titlelogo: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  titleText: {
+    fontSize: 20,
+    color: "#3D1763",
+    fontWeight: "bold",
+  },
+  subtitleText: {
+    fontSize: 16,
+    color: "#939393",
+    textAlign: "center",
+  },
+  bottomContainer: {
+    width: "100%",
+    marginTop: "auto",
+    marginBottom: 20,
+    padding:20,
     justifyContent: "center",
     alignItems: "center",
   },
-  ImageContainer: {
-
-  }
 });
